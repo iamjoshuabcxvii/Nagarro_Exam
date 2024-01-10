@@ -1,7 +1,7 @@
 package com.job.technicalexam.util;
 
-import com.job.technicalexam.model.OptionsModel;
-import com.job.technicalexam.model.ProductsModel;
+import com.job.technicalexam.model.database.OptionsModel;
+import com.job.technicalexam.model.database.ProductsModel;
 import com.job.technicalexam.repository.OptionsModelRepository;
 import com.job.technicalexam.repository.ProductsModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;

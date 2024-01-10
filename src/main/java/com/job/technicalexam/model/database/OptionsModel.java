@@ -1,4 +1,4 @@
-package com.job.technicalexam.model;
+package com.job.technicalexam.model.database;
 
 import lombok.Data;
 

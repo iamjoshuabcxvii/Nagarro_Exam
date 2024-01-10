@@ -1,4 +1,4 @@
-package com.job.technicalexam.model;
+package com.job.technicalexam.model.response;
 
 import lombok.Data;
 
@@ -7,14 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
 @Data
-public class ProductsModel {
+public class OptionsModelModifiedResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int productId;
     private String name;
-    private String currency;
+    private double price;
 }
