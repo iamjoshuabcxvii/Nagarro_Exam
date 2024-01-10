@@ -39,12 +39,11 @@ public class MainService {
         ProductResponse productResponse = new ProductResponse();
         ProductsModel productsModel;
         List<OptionsModel> optionsModel;
-//        OptionsModelModifiedResponse optionsModelModifiedResponse = null;
         List<OptionsModelModifiedResponse> optionsModelModifiedResponseList = new ArrayList<>();
 
 
         productsModel = productsModelRepository.findDistinctFirstByProductId(id);
-        try{
+        try {
             optionsModel = optionsModelRepository.findAllByProductsId(productsModel.getProductId());
         } catch (Exception exception) {
             throw new ErrorException("Error has been Encountered. Please modify your request or try again.");
@@ -70,11 +69,9 @@ public class MainService {
     public CombinedResponse combinedApi(String searchTerm) {
         CombinedResponse combinedResponse = new CombinedResponse();
         MetaModel metaModel = new MetaModel();
-        ItemsResponse itemsResponse = new ItemsResponse();
         List<ProductsModel> productsModelList;
 
         List<ItemsResponse> itemsResponseList = new ArrayList<>();
-        OptionsModel optionsModel = new OptionsModel();
         List<OptionsModel> optionsModelList = new ArrayList<>();
 
         productsModelList = productsModelRepository.findByNameContainingIgnoreCase(searchTerm);
@@ -101,8 +98,8 @@ public class MainService {
 
     public ItemsResponse buildList(int id) {
         ItemsResponse itemsResponse = new ItemsResponse();
-        ProductsModel productsModel = new ProductsModel();
-        List<OptionsModel> optionsModel = new ArrayList<>();
+        ProductsModel productsModel;
+        List<OptionsModel> optionsModel;
 
         List<OptionsModelModifiedResponse> optionsModelModifiedResponseList = new ArrayList<>();
         List<Double> prices = new ArrayList<>();
@@ -123,6 +120,6 @@ public class MainService {
                 + " - " + productsModel.getCurrency() + Collections.max(prices));
         itemsResponse.setOptions(optionsModelModifiedResponseList);
 
-    return itemsResponse;
+        return itemsResponse;
     }
 }

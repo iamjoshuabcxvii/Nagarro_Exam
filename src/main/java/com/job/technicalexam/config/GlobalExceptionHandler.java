@@ -14,7 +14,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ErrorException.class)
     public ResponseEntity<ErrorHandlerResponse> handleHttpClientErrorException(ErrorException ex) {
         ErrorHandlerResponse errorHandlerResponse = new ErrorHandlerResponse(ex.getError());
-        return ResponseEntity.status (HttpStatus.BAD_REQUEST).body (errorHandlerResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorHandlerResponse);
     }
 
 }

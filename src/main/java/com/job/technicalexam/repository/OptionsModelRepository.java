@@ -10,5 +10,6 @@ import java.util.List;
 public interface OptionsModelRepository extends JpaRepository<OptionsModel, Long> {
 
     List<OptionsModel> findByProductsIdContains(Integer id);
+
     List<OptionsModel> findAllByProductsId(Integer id);
 }
