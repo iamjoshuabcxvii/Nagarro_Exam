@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Collections;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +27,7 @@ public class MainServiceUnitTest {
     ProductsModelRepository productsModelRepository;
 
     @Test
-    public void testSearchIds(){
+    public void testSearchIds() {
 
         when(productsModelRepository.findByNameContainingIgnoreCase(anyString()))
                 .thenReturn(Collections.singletonList(mockOfExistingProducts()));
@@ -34,13 +35,22 @@ public class MainServiceUnitTest {
         assertNotNull(searchResponse.getItemIds().get(0));
     }
 
-    private ProductsModel mockOfExistingProducts(){
+    @Test(expected = NullPointerException.class)
+    public void testSearchIdsWithNoReturn() {
+
+        when(productsModelRepository.findByNameContainingIgnoreCase(anyString()))
+                .thenReturn(Collections.singletonList(null));
+        SearchResponse searchResponse = mainService.searchApi("modern");
+        assertNull(searchResponse.getItemIds().get(0));
+    }
+
+    private ProductsModel mockOfExistingProducts() {
         ProductsModel productsModel = new ProductsModel();
 
         productsModel.setProductId(111);
         productsModel.setName("Modern Chair");
         productsModel.setCurrency("$");
 
-    return productsModel;
+        return productsModel;
     }
 }

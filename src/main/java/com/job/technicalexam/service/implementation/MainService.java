@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MainService implements MainInterface {
@@ -28,7 +29,9 @@ public class MainService implements MainInterface {
         List<ProductsModel> productsModelList = productsModelRepository.findByNameContainingIgnoreCase(searchTerm);
         List<Long> itemIds = new ArrayList<>();
 
-        productsModelList.stream().forEach(item -> itemIds.add(Long.valueOf(item.getProductId())));
+        if (Optional.of(itemIds).isPresent()) {
+            productsModelList.stream().forEach(item -> itemIds.add(Long.valueOf(item.getProductId())));
+        }
 
         SearchResponse searchResponse = new SearchResponse();
         searchResponse.setSearchTerm(searchTerm);
