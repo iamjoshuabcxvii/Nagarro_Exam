@@ -15,9 +15,11 @@ public class MainController {
 
     @GetMapping(value = "/searchapi", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> searchProducts(@RequestParam String searchTerm) {
+        return new ResponseEntity<>(mainService.searchApi(searchTerm), HttpStatus.OK);
+    }
 
-
-        return new ResponseEntity<>(mainService.searchProducts(searchTerm), HttpStatus.OK);
-
+    @GetMapping(value = "/productapi/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> productSearch(@PathVariable int id) {
+        return new ResponseEntity<>(mainService.productApi(id), HttpStatus.OK);
     }
 }

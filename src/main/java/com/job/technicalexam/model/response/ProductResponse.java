@@ -5,11 +5,10 @@ import lombok.Data;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Data
 public class ProductResponse {
 
     private int id;
     private String name;
-    private List<OptionsModelModifiedResponse> optionsModelModifiedResponseList;
+    private List<OptionsModelModifiedResponse> options;
 }
