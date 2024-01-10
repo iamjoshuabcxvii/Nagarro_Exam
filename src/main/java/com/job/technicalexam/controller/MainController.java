@@ -22,4 +22,10 @@ public class MainController {
     public ResponseEntity<?> productSearch(@PathVariable int id) {
         return new ResponseEntity<>(mainService.productApi(id), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/combinedapi", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> combinedSearch(@RequestParam String searchTerm) {
+
+        return new ResponseEntity<>(mainService.combinedApi(searchTerm), HttpStatus.OK);
+    }
 }
