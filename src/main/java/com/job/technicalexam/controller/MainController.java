@@ -1,5 +1,6 @@
 package com.job.technicalexam.controller;
 
+import com.job.technicalexam.model.exception.ErrorException;
 import com.job.technicalexam.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class MainController {
     }
 
     @GetMapping(value = "/productapi/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> productSearch(@PathVariable int id) {
+    public ResponseEntity<?> productSearch(@PathVariable int id) throws ErrorException {
         return new ResponseEntity<>(mainService.productApi(id), HttpStatus.OK);
     }
 

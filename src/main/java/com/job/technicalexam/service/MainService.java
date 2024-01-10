@@ -2,6 +2,7 @@ package com.job.technicalexam.service;
 
 import com.job.technicalexam.model.database.OptionsModel;
 import com.job.technicalexam.model.database.ProductsModel;
+import com.job.technicalexam.model.exception.ErrorException;
 import com.job.technicalexam.model.response.*;
 import com.job.technicalexam.repository.OptionsModelRepository;
 import com.job.technicalexam.repository.ProductsModelRepository;
@@ -34,7 +35,7 @@ public class MainService {
         return searchResponse;
     }
 
-    public ProductResponse productApi(int id) {
+    public ProductResponse productApi(int id) throws ErrorException {
         ProductResponse productResponse = new ProductResponse();
         ProductsModel productsModel;
         List<OptionsModel> optionsModel;
@@ -43,7 +44,11 @@ public class MainService {
 
 
         productsModel = productsModelRepository.findDistinctFirstByProductId(id);
-        optionsModel = optionsModelRepository.findAllByProductsId(productsModel.getProductId());
+        try{
+            optionsModel = optionsModelRepository.findAllByProductsId(productsModel.getProductId());
+        } catch (Exception exception) {
+            throw new ErrorException("Error has been Encountered. Please modify your request or try again.");
+        }
 
         optionsModel.stream().forEach(record -> {
             OptionsModelModifiedResponse optionsModelModifiedResponse = new OptionsModelModifiedResponse();
