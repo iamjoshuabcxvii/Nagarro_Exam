@@ -1,4 +1,4 @@
-package com.job.technicalexam.service;
+package com.job.technicalexam.service.implementation;
 
 import com.job.technicalexam.model.database.OptionsModel;
 import com.job.technicalexam.model.database.ProductsModel;
@@ -6,6 +6,7 @@ import com.job.technicalexam.model.exception.ErrorException;
 import com.job.technicalexam.model.response.*;
 import com.job.technicalexam.repository.OptionsModelRepository;
 import com.job.technicalexam.repository.ProductsModelRepository;
+import com.job.technicalexam.service.MainInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class MainService {
+public class MainService implements MainInterface {
 
     @Autowired
     ProductsModelRepository productsModelRepository;
@@ -22,6 +23,7 @@ public class MainService {
     @Autowired
     OptionsModelRepository optionsModelRepository;
 
+    @Override
     public SearchResponse searchApi(String searchTerm) {
         List<ProductsModel> productsModelList = productsModelRepository.findByNameContainingIgnoreCase(searchTerm);
         List<Long> itemIds = new ArrayList<>();
@@ -35,6 +37,7 @@ public class MainService {
         return searchResponse;
     }
 
+    @Override
     public ProductResponse productApi(int id) throws ErrorException {
         ProductResponse productResponse = new ProductResponse();
         ProductsModel productsModel;
@@ -66,6 +69,7 @@ public class MainService {
         return productResponse;
     }
 
+    @Override
     public CombinedResponse combinedApi(String searchTerm) {
         CombinedResponse combinedResponse = new CombinedResponse();
         MetaModel metaModel = new MetaModel();
@@ -96,7 +100,7 @@ public class MainService {
         return combinedResponse;
     }
 
-    public ItemsResponse buildList(int id) {
+    private ItemsResponse buildList(int id) {
         ItemsResponse itemsResponse = new ItemsResponse();
         ProductsModel productsModel;
         List<OptionsModel> optionsModel;
